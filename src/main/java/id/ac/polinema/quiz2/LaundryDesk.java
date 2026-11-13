@@ -1,6 +1,10 @@
 package id.ac.polinema.quiz2;
 
+import java.lang.foreign.ValueLayout;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * TAHAP 4 dan 5 (collections dan SOLID): meja laundry yang menyimpan
@@ -15,15 +19,20 @@ import java.util.List;
  * Tahap 5: pencetak struk diberikan dari luar lewat constructor. Jangan
  * membuat ConsoleReceiptPrinter di dalam kelas ini.
  */
-public class LaundryDesk {
+    
 
+public class LaundryDesk{
+
+    private List<LaundryOrder> orders = new ArrayList<>();
+    private Map<String, LaundryOrder> ordersMap = new HashMap<>();
+    private ReceiptPrinter printer;
     /**
      * Membuat meja laundry kosong dan menyimpan pencetak struk yang diberikan.
      *
      * @param printer pencetak struk yang dipakai saat checkout
      */
     public LaundryDesk(ReceiptPrinter printer) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        this.printer = printer;
     }
 
     /**
@@ -32,7 +41,10 @@ public class LaundryDesk {
      * @param order pesanan laundry yang ditambahkan
      */
     public void add(LaundryOrder order) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (order != null) {
+            orders.add(order);
+            ordersMap.put(order.getOrderId(),order);
+        }
     }
 
     /**
@@ -42,21 +54,21 @@ public class LaundryDesk {
      * @return pesanan laundry yang cocok, atau {@code null} bila tidak ada
      */
     public LaundryOrder findById(String orderId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return ordersMap.get(orderId);
     }
 
     /**
      * @return jumlah pesanan laundry yang tersimpan
      */
     public int count() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.size();
     }
 
     /**
      * @return daftar pesanan laundry menurut urutan penambahan
      */
     public List<LaundryOrder> getOrders() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders;
     }
 
     /**
@@ -68,6 +80,7 @@ public class LaundryDesk {
      * @param orderId kode pesanan laundry yang di-checkout
      */
     public void checkout(String orderId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        printer.print(orderId, ordersMap.get(orderId).calculatePrice());
+        
     }
 }

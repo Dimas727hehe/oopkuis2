@@ -40,7 +40,7 @@ public class OrderCalculator{
         double x = 0;
         for (LaundryOrder y : orders) {
             if (y instanceof Deliverable) {
-                x += 5000;
+                x += ((Deliverable) y).deliveryFee();
             }
         }
         return x;
@@ -55,8 +55,8 @@ public class OrderCalculator{
      * @throws InvalidWeightException bila berat tidak valid
      */
     public static void validate(LaundryOrder order) throws InvalidWeightException {
-        if (order.getWeightKg() <= 0 && order.getWeightKg() > 20) {
-            throw new InvalidWeightException("Berat tidak valid");
+        if (order.getWeightKg() <= 0 || order.getWeightKg() > 20) {
+            throw new InvalidWeightException("Invalid weight: " + order.getWeightKg());
         }
     }
 
