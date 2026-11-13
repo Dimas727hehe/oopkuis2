@@ -1,6 +1,5 @@
 package id.ac.polinema.quiz2;
 
-import java.lang.foreign.ValueLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
