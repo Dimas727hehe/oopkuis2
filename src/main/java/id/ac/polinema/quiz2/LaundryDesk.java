@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class LaundryDesk{
 
     private List<LaundryOrder> orders = new ArrayList<>();
-    private Map<String, LaundryOrder> ordersMap = new HashMap<>();
+    protected Map<String, LaundryOrder> ordersMap = new HashMap<>();
     private ReceiptPrinter printer;
     /**
      * Membuat meja laundry kosong dan menyimpan pencetak struk yang diberikan.
@@ -80,7 +80,9 @@ public class LaundryDesk{
      * @param orderId kode pesanan laundry yang di-checkout
      */
     public void checkout(String orderId) {
-        printer.print(orderId, ordersMap.get(orderId).calculatePrice());
-        
+        LaundryOrder order = findById(orderId);
+        if (order != null) {
+            printer.print(orderId, order.calculatePrice());
+        }
     }
 }
