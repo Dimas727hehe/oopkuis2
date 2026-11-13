@@ -10,17 +10,22 @@ import java.util.List;
  * Semua method memproses objek lewat tipe {@code LaundryOrder}, tanpa mengecek
  * nama subclass.
  */
-public class OrderCalculator {
+public class OrderCalculator{
 
     /**
      * Menjumlahkan harga semua pesanan laundry di daftar.
      * Satu looping untuk semua jenis, tanpa cabang if per subclass.
      *
-     * @param orders daftar pesanan laundry
+     * 
      * @return jumlah semua harga, atau 0 bila daftar kosong
      */
+
     public static double totalPrice(List<LaundryOrder> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        double x = 0;
+        for (LaundryOrder y : orders) {
+            x += y.calculatePrice();
+        }
+        return x;
     }
 
     /**
@@ -32,7 +37,13 @@ public class OrderCalculator {
      * @return jumlah biaya antar-jemput, atau 0 bila tidak ada yang punya
      */
     public static double totalDelivery(List<LaundryOrder> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        double x = 0;
+        for (LaundryOrder y : orders) {
+            if (y instanceof Deliverable) {
+                x += 5000;
+            }
+        }
+        return x;
     }
 
     /**
@@ -44,7 +55,9 @@ public class OrderCalculator {
      * @throws InvalidWeightException bila berat tidak valid
      */
     public static void validate(LaundryOrder order) throws InvalidWeightException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (order.getWeightKg() <= 0 && order.getWeightKg() > 20) {
+            throw new InvalidWeightException("Berat tidak valid");
+        }
     }
 
     /**
@@ -54,6 +67,12 @@ public class OrderCalculator {
      * @return true bila valid, false bila validate melempar InvalidWeightException
      */
     public static boolean isAcceptable(LaundryOrder order) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            validate(order);
+            return true;
+        } catch (InvalidWeightException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }
