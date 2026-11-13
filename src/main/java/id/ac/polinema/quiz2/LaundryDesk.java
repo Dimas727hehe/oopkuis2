@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class LaundryDesk{
 
     private List<LaundryOrder> orders = new ArrayList<>();
-    protected Map<String, LaundryOrder> ordersMap = new HashMap<>();
+    private Map<String, LaundryOrder> ordersMap = new HashMap<>();
     private ReceiptPrinter printer;
     /**
      * Membuat meja laundry kosong dan menyimpan pencetak struk yang diberikan.
