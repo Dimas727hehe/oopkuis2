@@ -9,9 +9,9 @@ package id.ac.polinema.quiz2;
  */
 public abstract class LaundryOrder {
 
-    protected String orderId;
-    protected Customer customer;
-    protected double weightKg;
+    private String orderId;
+    private Customer customer;
+    private double weightKg;
 
     public LaundryOrder(String orderId, Customer customer, double weightKg) {
         this.orderId = orderId;
